@@ -1,0 +1,34 @@
+#include<iostream>
+#include<string>
+#include<map>
+using namespace std;
+int main()
+{
+	string seller;
+	string buyer;
+	cin >> seller >> buyer;
+	int LengthSeller = seller.size();
+	int LengthBuyer = buyer.size();
+	map<char, int> sellerMap;
+	for (int i = 0; i < LengthSeller; ++i)
+	{
+		auto ret = sellerMap.insert({ seller[i],1 });
+		if (!ret.second)
+			++ret.first->second;
+	}
+	for (int i = 0; i < buyer.size(); ++i)
+	{
+		auto sellerIT = sellerMap.find(buyer[i]);
+		if (sellerIT!= sellerMap.end() && sellerIT->second)
+		{
+			--LengthBuyer;
+			--sellerIT->second;
+		}
+	}
+	if (LengthBuyer)
+	{
+		cout << "No" << " " << LengthBuyer;
+	}
+	else
+		cout << "Yes" << " " << seller.size() - buyer.size();
+}

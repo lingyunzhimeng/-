@@ -1,0 +1,10 @@
+void split(const string& s, vector<int>& sv, char flag) {
+	sv.clear();
+	istringstream iss(s);
+	string temp;
+
+	while (getline(iss, temp, flag)) {
+		sv.push_back(stoi(temp));
+	}
+	return;
+}

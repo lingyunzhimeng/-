@@ -1,0 +1,25 @@
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+	string str;
+	string tmpstr;
+	getline(cin, str);
+	vector<int> numvec;
+	for (int i = 0; i < str.size(); ++i) {
+		int tmp = 0;
+		while (str[i] != ' ' && i < str.size())
+		{
+			tmp = tmp * 10 + str[i] - '0';
+			++i;
+		}
+		numvec.push_back(tmp);
+	}
+	for (int i = 0; i < (int)numvec.size(); ++i)
+		cout << numvec[i]<<" ";
+}

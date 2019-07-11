@@ -1,0 +1,28 @@
+#include<string>
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	string strPAT;
+	cin>>strPAT;
+
+	int istr = strPAT.size(), numAT = 0, numPAT = 0, num = 0;
+	if (istr == 0)
+		cout<<0;
+	while (istr--)
+	{
+		if ('T' == strPAT[istr])
+			numAT++;
+		else if ('A' == strPAT[istr])
+			numPAT += numAT;
+		else {         
+			num += numPAT;
+			if (num >= 1000000007) 
+				num %= 1000000007;
+		}
+	}
+
+	cout<< num;
+	return 0;
+}

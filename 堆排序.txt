@@ -1,0 +1,62 @@
+#include<vector>
+#include<sstream>
+#include<iostream>
+
+using namespace std;
+
+void MaxHeapify(vector<int>& data, int i, int start, int end)
+{
+	int leftchild = 2 * i + 1;
+	int rightchild = 2 * i + 2;
+	int largest;
+	if (leftchild <= end && data[leftchild] > data[i])
+	{
+		largest = leftchild;
+	}
+	else
+		largest = i;
+	if (rightchild <= end && data[rightchild] > data[largest])
+		largest = rightchild;
+	if (largest != i)
+	{
+		swap(data[i], data[largest]);
+		MaxHeapify(data, largest, start, end);
+	}
+}
+void BuildMaxHeap(vector<int>& data, int length)
+{
+	for (int i = length / 2 - 1; i >= 0; i--)
+	{
+		MaxHeapify(data, i, 0, length - 1);
+	}
+}
+
+void heapSort(vector<int>& data, int length)
+{
+	BuildMaxHeap(data, length);
+	for (int i = length - 1; i >= 1; i--)
+	{
+		swap(data[0], data[i]);
+		MaxHeapify(data, 0, 0, i - 1);
+	}
+}
+
+int main()
+{
+	stringstream ss;
+	string str;
+	int temp;
+	vector<int> data;
+	getline(cin, str);
+	ss << str;
+	while (ss >> temp)
+	{
+		data.push_back(temp);
+	}
+	heapSort(data,(int)data.size());
+	for (auto ele : data)
+	{
+		cout << ele << " ";
+	}
+	cout << endl;
+}

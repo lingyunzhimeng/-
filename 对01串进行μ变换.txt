@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+int findnum(int N)
+{
+	int* A = new int[N];
+	int* B = new int[N];
+	A[0] = 0;
+	B[0] = 0;
+	for (int i = 1; i < N; ++i)
+	{
+		A[i] = A[i - 1] + B[i - 1];
+		B[i] = A[i - 1] + B[i - 1] + i % 2;
+	}
+	return B[N - 1];
+}
+int main()
+{
+	int N;
+	cin >> N;
+	cout << findnum(N);
+	return 0;
+}
