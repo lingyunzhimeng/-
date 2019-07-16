@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+struct ListNode 
+{
+	int val;
+	ListNode* next;
+};
+void tailCreateList(ListNode* &pHead)
+{
+	ListNode* tmpNode, * curNode;
+	curNode = pHead;
+	int data;
+	while (cin >> data)
+	{
+		tmpNode = new ListNode();
+		tmpNode->val = data;
+		curNode->next = tmpNode;
+		curNode = tmpNode;
+		if (getchar() == '\n')
+			break;
+	}
+	curNode->next = NULL;
+}
+void displayList(ListNode* pHead)
+{
+	ListNode* node = pHead;
+	while (node != NULL)
+	{
+		cout << node->val;
+		node = node->next;
+	}
+}
+ListNode* ReverseList(ListNode* &pHead)
+{
+	ListNode* prenode=NULL,* nextnode;
+	while (pHead != NULL)
+	{
+		nextnode = pHead->next;
+		pHead->next = prenode;
+		prenode = pHead;
+		pHead = nextnode;
+	}
+	return prenode;
+}
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+	ListNode* fast = head;
+	ListNode* slow = head;
+	for (int i = 0; i < n; i++)
+	{
+		if (fast == NULL)
+			return NULL;
+		fast = fast->next;
+	}
+	if (fast == NULL)
+	{
+		head = head->next;
+	}
+	while (fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next;
+	}
+	slow->next = slow->next->next;
+	return head;
+}
+int main()
+{
+	ListNode* pHead = new ListNode();
+	tailCreateList(pHead);
+	displayList(pHead->next);
+	cout << endl;
+	//displayList(ReverseList(pHead->next));
+	cout << endl;
+	//displayList(removeNthFromEnd(pHead->next, 1));
+	//cout << endl;
+	displayList(removeNthFromEnd(ReverseList(pHead->next), 1));
+}
